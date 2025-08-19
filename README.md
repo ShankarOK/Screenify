@@ -48,7 +48,7 @@ Experience Screenify in action with our intuitive interface:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/kartigopal01/Screenify.git
+   git clone https://github.com/ShankarOK/Screenify.git
    cd Screenify
    ```
 
@@ -204,8 +204,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Karti Gopal**
 
-- GitHub: [@kartigopal01](https://github.com/kartigopal01)
-- Repository: [Screenify](https://github.com/kartigopal01/Screenify)
+- GitHub: [@kartigopal01](https://github.com/shankarok)
+- Repository: [Screenify](https://github.com/shankarok/Screenify)
 
 ## 🙏 Acknowledgments
 
