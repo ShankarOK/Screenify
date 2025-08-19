@@ -200,9 +200,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Karti Gopal**
+**Shankar O K**
 
-- GitHub: [@kartigopal01](https://github.com/shankarok)
+- GitHub: [@ShankarOK](https://github.com/shankarok)
 - Repository: [Screenify](https://github.com/shankarok/Screenify)
 
 ## 🙏 Acknowledgments
