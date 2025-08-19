@@ -4,8 +4,6 @@
 
 Screenify is an AI-powered resume analyzer that provides comprehensive feedback on your resume's ATS (Applicant Tracking System) compatibility. Get instant insights, detailed scoring, and actionable suggestions to optimize your resume for better job application success.
 
-![Screenify Hero](public/readme/hero.webp)
-
 ## ✨ Features
 
 - **🤖 AI-Powered Analysis**: Advanced algorithms analyze your resume content and structure
