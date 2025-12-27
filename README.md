@@ -21,8 +21,6 @@ Screenify is an AI-powered resume analyzer that provides comprehensive feedback 
 
 Experience Screenify in action with our intuitive interface:
 
-![Resume Analysis Demo](./public/images/resume-scan.gif)
-
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 19, TypeScript, Tailwind CSS
