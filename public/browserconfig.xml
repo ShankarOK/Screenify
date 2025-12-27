@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <!-- Icon files will be added when PWA icons are generated -->
+            <!-- See public/icons/ICON_GENERATION_GUIDE.md for instructions -->
+            <TileColor>#3b82f6</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig> 
