@@ -22,7 +22,9 @@ export default function Home() {
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
       <Navbar />
-      <LandingPage />
+      <div className="pt-28">
+        <LandingPage />
+      </div>
     </main>
   );
 }

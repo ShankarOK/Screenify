@@ -1,6 +1,7 @@
 interface Step {
   label: string;
   status: "pending" | "active" | "completed";
+  description?: string;
 }
 
 interface ProgressStepperProps {
@@ -15,47 +16,128 @@ const ProgressStepper = ({
   className = "",
 }: ProgressStepperProps) => {
   const stepIcons = [
-    <svg key="upload" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+    // Uploading
+    <svg
+      key="upload"
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+      />
     </svg>,
-    <svg key="extract" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+    // Extracting
+    <svg
+      key="extract"
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+      />
     </svg>,
-    <svg key="analyze" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+    // Analyzing
+    <svg
+      key="analyze"
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+      />
     </svg>,
-    <svg key="generate" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    // Generating
+    <svg
+      key="generate"
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
     </svg>,
   ];
 
-  return (
-    <div className={`w-full max-w-4xl mx-auto ${className}`}>
-      <div className="flex items-center justify-between">
-        {steps.map((step, index) => {
-          const isActive = index === currentStep;
-          const isCompleted = index < currentStep;
-          const isPending = index > currentStep;
+  const stepDescriptions = [
+    "Securely receiving your resume",
+    "Reading and structuring content",
+    "Detecting skills and strengths",
+    "Preparing insights for you",
+  ];
 
-          return (
-            <div key={index} className="flex items-center flex-1">
-              <div className="flex flex-col items-center flex-1 relative z-10">
+  return (
+    <div className={`w-full max-w-5xl mx-auto px-4 ${className}`}>
+      <div className="bg-white/70 backdrop-blur-md rounded-3xl border border-white/60 shadow-2xl p-6 lg:p-10">
+        {/* Horizontal Stepper */}
+        <div className="flex items-center justify-between relative">
+          {/* Progress Line */}
+          <div className="absolute top-6 lg:top-8 left-0 right-0 h-1 bg-gray-200 rounded-full z-0">
+            <div
+              className="h-full bg-gradient-to-r from-[#8e98ff] via-[#606beb] to-[#8e98ff] rounded-full transition-all duration-700 ease-out"
+              style={{
+                width: `${(currentStep / (steps.length - 1)) * 100}%`,
+              }}
+            />
+          </div>
+
+          {steps.map((step, index) => {
+            const isActive = index === currentStep;
+            const isCompleted = index < currentStep;
+            const isPending = index > currentStep;
+
+            return (
+              <div
+                key={index}
+                className="flex flex-col items-center flex-1 relative z-10"
+              >
                 {/* Step Circle */}
-                <div className="relative">
+                <div className="relative mb-3 lg:mb-4">
+                  {/* Glow Effect for Active Step */}
+                  {isActive && (
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#8e98ff] to-[#606beb] opacity-40 blur-lg animate-pulse-slow scale-150" />
+                  )}
+
+                  {/* Completed Pulse */}
+                  {isCompleted && (
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#8e98ff] to-[#606beb] opacity-30 animate-ping" />
+                  )}
+
                   <div
                     className={`
-                      w-16 h-16 rounded-2xl flex items-center justify-center font-bold text-sm transition-all duration-500 shadow-lg
-                      ${isCompleted
-                        ? "bg-gradient-to-br from-green-500 to-green-600 text-white scale-100"
-                        : isActive
-                        ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white scale-110 ring-4 ring-blue-200/50 animate-pulse-slow"
-                        : "bg-gray-200 text-gray-500 scale-100"
+                      relative w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center
+                      transition-all duration-500 ease-out
+                      ${
+                        isCompleted
+                          ? "bg-gradient-to-br from-[#8e98ff] to-[#606beb] text-white shadow-lg scale-100"
+                          : isActive
+                          ? "bg-white border-2 border-[#606beb] text-[#606beb] shadow-xl scale-110 ring-4 ring-[#606beb]/20"
+                          : "bg-white border-2 border-gray-200 text-gray-400 shadow-sm scale-100"
                       }
                     `}
                   >
                     {isCompleted ? (
                       <svg
-                        className="w-7 h-7"
+                        className="w-5 h-5 lg:w-7 lg:h-7"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -68,64 +150,83 @@ const ProgressStepper = ({
                         />
                       </svg>
                     ) : (
-                      <div className="flex items-center justify-center">
-                        {stepIcons[index] || index + 1}
+                      <div
+                        className={`
+                          transition-all duration-300
+                          ${isActive ? "animate-pulse-slow" : ""}
+                        `}
+                      >
+                        <div className="w-5 h-5 lg:w-6 lg:h-6">
+                          {stepIcons[index]}
+                        </div>
                       </div>
                     )}
+
+                    {/* Active Spinner */}
+                    {isActive && (
+                      <div className="absolute inset-0 border-2 border-[#606beb] border-t-transparent rounded-full animate-spin opacity-50" />
+                    )}
                   </div>
-                  {/* Active Pulse Effect */}
-                  {isActive && (
-                    <div className="absolute inset-0 rounded-2xl bg-blue-400 animate-ping opacity-20"></div>
-                  )}
                 </div>
-                
+
                 {/* Step Label */}
-                <div className="mt-4 text-center">
-                  <p
+                <div className="text-center mb-2">
+                  <div
                     className={`
-                      text-sm font-bold transition-colors duration-300 mb-1
-                      ${isActive
-                        ? "text-blue-600"
-                        : isCompleted
-                        ? "text-green-600"
-                        : "text-gray-400"
+                      font-semibold text-xs lg:text-sm mb-1 transition-colors duration-300
+                      ${
+                        isActive
+                          ? "text-gray-900"
+                          : isCompleted
+                          ? "text-gray-900"
+                          : "text-gray-400"
                       }
                     `}
                   >
                     {step.label}
-                  </p>
-                  {isActive && (
-                    <div className="w-12 h-1 bg-blue-200 rounded-full mx-auto overflow-hidden">
-                      <div className="h-full bg-blue-500 rounded-full animate-shimmer"></div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              
-              {/* Connector Line */}
-              {index < steps.length - 1 && (
-                <div className="flex-1 h-1.5 mx-4 relative -z-0">
-                  <div className="absolute inset-0 bg-gray-200 rounded-full"></div>
+                  </div>
                   <div
                     className={`
-                      absolute inset-0 rounded-full transition-all duration-700
-                      ${isCompleted
-                        ? "bg-gradient-to-r from-green-500 to-green-400 w-full"
-                        : isActive
-                        ? "bg-gradient-to-r from-green-500 via-blue-500 to-blue-200 w-1/2"
-                        : "bg-transparent w-0"
+                      text-[10px] lg:text-xs font-medium transition-all duration-300 hidden lg:block
+                      ${
+                        isActive
+                          ? "text-[#606beb] opacity-100"
+                          : isCompleted
+                          ? "text-gray-600 opacity-70"
+                          : "text-gray-400 opacity-50"
                       }
                     `}
-                  ></div>
+                  >
+                    {stepDescriptions[index]}
+                  </div>
                 </div>
-              )}
-            </div>
-          );
-        })}
+
+                {/* Status Badge */}
+                <div
+                  className={`
+                    text-xs px-3 py-1 rounded-full font-medium transition-all duration-300
+                    ${
+                      isCompleted
+                        ? "bg-green-50 text-green-700"
+                        : isActive
+                        ? "bg-blue-50 text-blue-700"
+                        : "bg-gray-50 text-gray-500"
+                    }
+                  `}
+                >
+                  {isCompleted
+                    ? "Completed"
+                    : isActive
+                    ? "In Progress"
+                    : "Pending"}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 };
 
 export default ProgressStepper;
-

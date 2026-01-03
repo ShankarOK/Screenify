@@ -24,7 +24,7 @@ body {
 }
 
 main {
-  @apply min-h-screen pt-10;
+  @apply min-h-screen;
 }
 h1 {
   @apply text-6xl  text-gradient leading-tight tracking-[-2px] font-semibold;
@@ -47,6 +47,52 @@ textarea {
     @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white
            focus:ring-2 focus:ring-blue-500/20
            transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.custom-input,
+.custom-textarea {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 
+           focus:outline-none focus:border-transparent
+           transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed
+           text-sm placeholder:text-gray-400 placeholder:font-normal
+           shadow-sm;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.9));
+    position: relative;
+}
+
+.custom-input:hover:not(:focus):not(:disabled),
+.custom-textarea:hover:not(:focus):not(:disabled) {
+    @apply border-gray-300 shadow-md;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(249, 250, 251, 0.95));
+}
+
+.custom-input:focus,
+.custom-textarea:focus {
+    @apply border-transparent;
+    box-shadow: 
+        0 0 0 2px rgba(99, 102, 241, 0.12),
+        0 0 0 4px rgba(99, 102, 241, 0.06),
+        0 4px 16px rgba(99, 102, 241, 0.18),
+        inset 0 1px 3px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(249, 250, 251, 0.98));
+    animation: input-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes input-glow {
+    0%, 100% {
+        box-shadow: 
+            0 0 0 2px rgba(99, 102, 241, 0.1),
+            0 0 0 4px rgba(99, 102, 241, 0.05),
+            0 4px 12px rgba(99, 102, 241, 0.15),
+            inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    50% {
+        box-shadow: 
+            0 0 0 2px rgba(99, 102, 241, 0.15),
+            0 0 0 4px rgba(99, 102, 241, 0.08),
+            0 4px 16px rgba(99, 102, 241, 0.2),
+            inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
 }
 
 form {
@@ -104,11 +150,71 @@ form {
   }
 
   .feedback-section {
-    @apply flex flex-col gap-8 w-1/2 px-8 max-lg:w-full py-6;
+    @apply flex flex-col gap-8 w-1/2 px-6 lg:px-8 max-lg:w-full py-6 lg:py-8;
   }
 
   .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
+    @apply flex flex-row justify-between items-center bg-white/95 backdrop-blur-md rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto shadow-lg border border-gray-200/60;
+  }
+
+  .fixed-navbar {
+    @apply fixed top-4 left-1/2 -translate-x-1/2 z-50;
+    width: calc(100% - 2rem);
+    max-width: 1200px;
+  }
+
+  @media (max-width: 640px) {
+    .fixed-navbar {
+      top: 0.5rem;
+      width: calc(100% - 1rem);
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* Consistent spacing for content below fixed navbar */
+  /* Navbar structure: top-4 (1rem/16px) + navbar with p-4 padding (~5.5rem/88px) + shadow + comfortable gap (1rem/16px) = 9rem */
+  /* Using 9rem (144px) to ensure no overlap with shadow and border effects */
+  .page-content-spacing {
+    padding-top: 9rem; /* 144px - ensures content starts clearly below navbar with comfortable spacing */
+  }
+
+  @media (max-width: 640px) {
+    /* Mobile: top-0.5rem (0.5rem/8px) + navbar height (~5.5rem/88px) + spacing (1rem/16px) = 7rem */
+    .page-content-spacing {
+      padding-top: 7rem; /* 112px on mobile */
+    }
+  }
+
+  .floating-nav-button {
+    @apply w-12 h-12 rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-gray-200/60 
+           flex items-center justify-center text-gray-700 hover:text-gray-900 
+           transition-all duration-300 hover:scale-110 hover:shadow-xl
+           relative;
+  }
+
+  .floating-nav-button:hover .floating-nav-tooltip {
+    @apply opacity-100;
+  }
+
+  .floating-nav-tooltip {
+    @apply absolute left-full ml-3 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg 
+           whitespace-nowrap opacity-0 transition-opacity duration-200
+           pointer-events-none shadow-lg;
+  }
+
+  .floating-nav-tooltip::before {
+    content: '';
+    @apply absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-gray-900;
+  }
+
+  @media (max-width: 640px) {
+    .floating-nav-button {
+      @apply w-10 h-10;
+    }
+    .floating-nav-tooltip {
+      @apply hidden;
+    }
   }
 
   .score-badge {
@@ -116,7 +222,15 @@ form {
   }
 
   .form-div {
-    @apply flex flex-col gap-2 w-full items-start;
+    @apply flex flex-col gap-1.5 w-full items-start;
+  }
+
+  .form-label {
+    @apply flex items-center gap-1.5 text-gray-800 font-semibold mb-1.5 text-sm;
+  }
+
+  .required-asterisk {
+    @apply text-red-500 font-semibold ml-0.5;
   }
 
   .uplader-drag-area {
@@ -185,6 +299,15 @@ form {
   }
   100% {
     transform: translateX(100%);
+  }
+}
+
+@keyframes shimmer-gradient {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
 
@@ -275,6 +398,19 @@ form {
 
 .animate-pulse-shadow {
   animation: pulse-shadow 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
 .hover\:shadow-3xl:hover {

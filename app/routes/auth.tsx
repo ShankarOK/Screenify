@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthCard } from "~/components/AuthCard";
-import AuthIllustration from "~/components/AuthIllustration";
+import Navbar from "~/components/Navbar";
 import { usePuterStore } from "~/lib/puter";
 
 export const meta = () => [
@@ -29,28 +29,23 @@ const Auth = () => {
 
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Side - Auth Card */}
-          <div className="flex flex-col items-center lg:items-start">
-            {/* App Name & Tagline */}
-            <div className="mb-8 text-center lg:text-left">
-              <Link to="/" className="inline-block mb-2">
-                <h1 className="text-4xl lg:text-5xl font-bold text-gradient">
-                  Screenify
-                </h1>
-              </Link>
-              <p className="text-gray-500 text-sm font-medium">
-                Smart AI Resume Analysis
-              </p>
-            </div>
-
-            {/* Auth Card */}
-            <AuthCard onLogout={handleLogout} />
+      <Navbar />
+      <div className="w-full max-w-4xl mx-auto pt-28">
+        <div className="flex flex-col items-center">
+          {/* App Name & Tagline */}
+          <div className="mb-8 text-center">
+            <Link to="/" className="inline-block mb-2">
+              <h1 className="text-4xl lg:text-5xl font-bold text-gradient">
+                Screenify
+              </h1>
+            </Link>
+            <p className="text-gray-500 text-sm font-medium">
+              Smart AI Resume Analysis
+            </p>
           </div>
 
-          {/* Right Side - Illustration (Desktop Only) */}
-          <AuthIllustration />
+          {/* Auth Card */}
+          <AuthCard onLogout={handleLogout} />
         </div>
       </div>
     </main>

@@ -55,7 +55,7 @@ export const Accordion: React.FC<AccordionProps> = ({
         <AccordionContext.Provider
             value={{ activeItems, toggleItem, isItemActive }}
         >
-            <div className={`space-y-2 ${className}`}>{children}</div>
+            <div className={`space-y-3 ${className}`}>{children}</div>
         </AccordionContext.Provider>
     );
 };
@@ -72,7 +72,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
                                                                 className = "",
                                                             }) => {
     return (
-        <div className={`overflow-hidden border-b border-gray-200 ${className}`}>
+        <div className={`overflow-hidden ${className}`}>
             {children}
         </div>
     );
@@ -123,17 +123,21 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
         <button
             onClick={handleClick}
             className={`
-        w-full px-4 py-3 text-left
-        focus:outline-none
-        transition-colors duration-200 flex items-center justify-between cursor-pointer
+        w-full px-5 py-4 text-left
+        focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:ring-offset-2
+        transition-all duration-200 flex items-center justify-between cursor-pointer
         ${className}
       `}
         >
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-3 flex-1">
                 {iconPosition === "left" && (icon || defaultIcon)}
                 <div className="flex-1">{children}</div>
             </div>
-            {iconPosition === "right" && (icon || defaultIcon)}
+            {iconPosition === "right" && (
+              <div className="flex-shrink-0 ml-4">
+                {icon || defaultIcon}
+              </div>
+            )}
         </button>
     );
 };
@@ -160,7 +164,7 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({
         ${className}
       `}
         >
-            <div className="px-4 py-3 ">{children}</div>
+            <div className="px-5 py-4">{children}</div>
         </div>
     );
 };

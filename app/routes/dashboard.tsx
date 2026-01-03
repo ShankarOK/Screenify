@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import DashboardResumeCard from "~/components/DashboardResumeCard";
+import DashboardSkeleton from "~/components/DashboardSkeleton";
 import { EmptyDashboard } from "~/components/EmptyDashboard";
 import Navbar from "~/components/Navbar";
-import PageLoader from "~/components/PageLoader";
 import { usePuterStore } from "~/lib/puter";
 import type { Route } from "./+types/dashboard";
 
@@ -49,9 +49,13 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen">
+      <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
         <Navbar />
-        <PageLoader />
+        <div className="w-full max-w-7xl mx-auto px-6 pb-8 lg:pb-12 relative z-10 page-content-spacing">
+          <DashboardSkeleton count={3} />
+        </div>
       </main>
     );
   }
@@ -68,9 +72,9 @@ export default function Dashboard() {
       
       <Navbar />
       
-      <div className="w-full max-w-7xl mx-auto px-6 py-8 lg:py-12 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-6 pb-8 lg:pb-12 relative z-10 page-content-spacing">
         {loadingResumes ? (
-          <PageLoader />
+          <DashboardSkeleton count={3} />
         ) : resumes.length > 0 ? (
           <div className="space-y-5">
             {resumes.map((resume, index) => (

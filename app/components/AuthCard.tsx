@@ -1,5 +1,4 @@
 import { usePuterStore } from "~/lib/puter";
-import Loader from "./Loader";
 
 interface AuthCardProps {
   onLogout?: () => void;
@@ -34,14 +33,16 @@ export const AuthCard = ({ onLogout }: AuthCardProps) => {
         {/* Auth Button */}
         <div className="mb-6">
           {isLoading ? (
-            <button
-              className="w-full primary-button flex items-center justify-center gap-3 py-4 disabled:opacity-70"
-              disabled
-              aria-label="Loading authentication"
+            <div
+              className="w-full primary-button flex items-center justify-center gap-3 py-4 opacity-70 rounded-full"
+              style={{
+                background: "linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%)",
+                backgroundSize: "200% 100%",
+                animation: "shimmer-gradient 2s ease-in-out infinite",
+              }}
             >
-              <Loader size="sm" />
-              <span>Signing you in...</span>
-            </button>
+              <span className="text-white">Signing you in...</span>
+            </div>
           ) : (
             <>
               {isAuthenticated ? (

@@ -72,11 +72,15 @@ const DashboardResumeCard = ({ resume }: { resume: Resume }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
               </div>
             ) : (
-              <div className="relative w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center border-2 border-gray-200/60 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-500">
-                <svg className="w-14 h-14 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+              <div className="relative w-28 h-28 rounded-2xl bg-gray-200 border-2 border-gray-200/60 shadow-lg overflow-hidden">
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background: "linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%)",
+                    backgroundSize: "200% 100%",
+                    animation: "shimmer-gradient 2s ease-in-out infinite",
+                  }}
+                />
               </div>
             )}
             {/* Status Indicator */}
